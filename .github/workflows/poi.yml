@@ -25,7 +25,6 @@ on:
 
 jobs:
   build_and_test:
-
     runs-on: ubuntu-latest
     
     steps:
@@ -56,6 +55,7 @@ jobs:
     - run: 'echo Created ${{ steps.create-issue.outputs.url }}'
       
   docker_build_and_push:
+    environment: Production
     if: github.ref == 'refs/heads/master'
     runs-on: ubuntu-latest
     needs: build_and_test
