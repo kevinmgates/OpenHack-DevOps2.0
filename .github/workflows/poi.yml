@@ -55,7 +55,7 @@ jobs:
     - run: 'echo Created ${{ steps.create-issue.outputs.url }}'
       
   docker_build_and_push:
-    environment: Production
+    environment: Dev
     if: github.ref == 'refs/heads/master'
     runs-on: ubuntu-latest
     needs: build_and_test
@@ -85,6 +85,7 @@ jobs:
           });
           
   deploy_staging:
+    environment: Staging
     if: github.ref == 'refs/heads/master'
     runs-on: ubuntu-latest
     needs: docker_build_and_push
@@ -114,6 +115,7 @@ jobs:
             body: body
           });
   validate_staging_and_swap_prod:
+    environment: Production
     if: github.ref == 'refs/heads/master'
     runs-on: ubuntu-latest
     needs: deploy_staging
